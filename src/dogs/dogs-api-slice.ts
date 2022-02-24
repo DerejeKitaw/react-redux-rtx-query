@@ -9,19 +9,21 @@ interface Breed {
 export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
-        baseUrl:'https://api.thedogapi.com/v1',
-        prepareHeaders(headers){
-            headers.set('x-api-key', DOGS_API_KEY);
-            return headers
-        }
+    baseUrl: 'https://api.thedogapi.com/v1',
+    prepareHeaders(headers) {
+      headers.set('x-api-key', DOGS_API_KEY)
+      return headers
+    },
   }),
   endpoints(builder) {
     return {
       fetchBread: builder.query<Breed[], number | void>({
-        query(limit = 10) {
+        query(limit = 5) {
           return `/breeds?limit=${limit}`
         },
       }),
     }
   },
 })
+
+export const { useFetchBreadQuery } = apiSlice
